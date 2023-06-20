@@ -2,6 +2,7 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './global/Navbar';
+import Workspace from './scences/Workspace';
 
 function App() {
   return (
@@ -10,7 +11,9 @@ function App() {
        <Routes>
         <Route path='/' element={<Navbar/>}>
           <Route path='/login'/>
-          <Route path='/workspace'/>
+          <Route path='/signup' />
+          
+          <Route path='/workspace' element={<Workspace/>}/>
         </Route>
        </Routes>
       </header>
