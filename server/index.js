@@ -3,10 +3,11 @@ const { createServer } = require("http");
 const { Server } = require("socket.io");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-
+const cors = require("cors");
 const app = express();
 dotenv.config({ path: "../.env" });
 app.use(express.json());
+app.use(cors());
 
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
@@ -18,7 +19,7 @@ const io = new Server(httpServer, {
 (async function () {
   try {
     await mongoose.connect(process.env.mongoDb, {
-      useNewUrlParser: true,  
+      useNewUrlParser: true,
     });
     console.log("Connected to db");
   } catch (error) {
@@ -27,14 +28,16 @@ const io = new Server(httpServer, {
 })();
 
 app.use("/user/", require("./routes/userRoutes"));
+app.use("/doc/",require("./routes/docRoutes"));
 
 io.on("connection", (socket) => {
-  console.log("Socket:", socket);
-  console.log("Socket is active and connected");
+  socket.on("join-room", (roomid) => {
+    socket.join(roomid);
+  });
 
-  socket.on("updateDoc", (payload) => {
+  socket.on("updateDoc", (payload, roomid) => {
     console.log("Payload:", payload);
-    io.emit("updatedDoc", payload);
+    io.to(roomid).emit("updatedDoc", payload);
   });
 });
 

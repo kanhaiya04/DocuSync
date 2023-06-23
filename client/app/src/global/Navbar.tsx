@@ -1,5 +1,4 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
 
 const Navbar: React.FC = () => {
   
@@ -7,7 +6,6 @@ const Navbar: React.FC = () => {
     <div>
       Navbar
       <a href="/workspace">Workspace</a>
-      <Outlet />
     </div>
   );
 };
