@@ -2,3 +2,4 @@ client/node_modules/
 server/node_modules/
 client/app/node_modules/
 .env
+client/out

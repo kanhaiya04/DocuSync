@@ -10,6 +10,7 @@ const Home = () => {
   const [roomId, setroomId] = useState("");
   const { docs, addDoc, getDoc } = useContext(DocsContent);
   const configStore = (window as any).configStore;
+  const host = "http://localhost:5000";
   useEffect(() => {
     if (configStore.getSecret()) {
       getDoc();
@@ -25,7 +26,6 @@ const Home = () => {
   const createNewDoc = () => {
     const roomId = nanoid(4);
     addDoc(title, roomId);
-    // navigator("/workspace")
   };
 
   const handleLogOut = () => {
@@ -39,17 +39,20 @@ const Home = () => {
     setroomId(e.target.value);
   };
 
-  const handleRoomJoin = async() => {
-      const response= await fetch("http://localhost:5000/user/join",{
-        method:"POST",
-        headers:{
-          "content-type": "application/json",
-          "token":configStore.getSecret(),
-        },
-        body: JSON.stringify({roomId}),
-      })
-      const json = await response.json();
-      console.log(json.response);
+  const handleRoomJoin = async () => {
+    const response = await fetch(`${host}/user/join`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        token: configStore.getSecret(),
+      },
+      body: JSON.stringify({ roomId }),
+    });
+    const json = await response.json();
+    getDoc();
+    if(!json.success){
+      //alert
+    }
   };
   return (
     <div>
@@ -72,7 +75,7 @@ const Home = () => {
             <h3
               key={index}
               onClick={() => {
-                navigator(`/workspace/${doc.title}`);
+                navigator(`/workspace/${doc._id}`);
               }}
             >
               {doc.title}

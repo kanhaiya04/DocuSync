@@ -6,13 +6,14 @@ const Login: React.FC = () => {
   const [cred, setCred] = useState({ email: "", password: "" });
   const ipcRendener = (window as any).ipcRenderer;
   const configStore = (window as any).configStore;
+  const host = "http://localhost:5000";
 useEffect(() => {
   if(configStore.getSecret())
     navigator("/");
 },)
 
   const handleClick = async () => {
-    const response = await fetch("http://localhost:5000/user/login", {
+    const response = await fetch(`${host}/user/login`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -29,7 +30,6 @@ useEffect(() => {
       //show alert
     }
     else{
-      console.log(json.msg);
       //show error
     }
   };

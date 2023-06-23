@@ -16,7 +16,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/" element={<Home />} />
-            <Route path="/workspace/:title" element={<Workspace />} />
+            <Route path="/workspace/:roomid" element={<Workspace />} />
           </Routes>
         </DocsState>
       </header>

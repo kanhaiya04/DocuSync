@@ -6,15 +6,14 @@ const SignUp: React.FC = () => {
   const ipcRendener = (window as any).ipcRenderer;
   const configStore = (window as any).configStore;
   const [cred, setCred] = useState({ name: "", email: "", password: "" });
+  const host = "http://localhost:5000";
 
-useEffect(() => {
-  if(configStore.getSecret())
-    navigator("/");
-},)
-
+  useEffect(() => {
+    if (configStore.getSecret()) navigator("/");
+  });
 
   const handleClick = async () => {
-    const response = await fetch("http://localhost:5000/user/createuser", {
+    const response = await fetch(`${host}/user/createuser`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -34,7 +33,6 @@ useEffect(() => {
       navigator("/");
       //alert
     } else {
-      console.log(json.msg);
       //alert
     }
   };

@@ -21,14 +21,13 @@ const io = new Server(httpServer, {
     await mongoose.connect(process.env.mongoDb, {
       useNewUrlParser: true,
     });
-    console.log("Connected to db");
   } catch (error) {
     console.log("Error connecting to db");
   }
 })();
 
 app.use("/user/", require("./routes/userRoutes"));
-app.use("/doc/",require("./routes/docRoutes"));
+app.use("/doc/", require("./routes/docRoutes"));
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomid) => {
@@ -36,7 +35,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("updateDoc", (payload, roomid) => {
-    console.log("Payload:", payload);
     io.to(roomid).emit("updatedDoc", payload);
   });
 });

@@ -77,7 +77,6 @@ router.post(
       const token = jwt.sign(data, process.env.ScreatKey);
       return res.send({ success: true, token });
     } catch (error) {
-      //console.log(error);
       return res.send({ success: false, msg: "Internal Server Error" });
     }
   }
