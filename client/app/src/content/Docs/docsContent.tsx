@@ -8,9 +8,11 @@ interface Doc {
         __v: number;
       }
 interface DocsContentContextType{
-        docs:Doc[],
+        docs:Doc[];
+        emptyDoc:()=>void;
         addDoc:(title:string,roomId:string)=>void;
         getDoc:()=>void;
+        deleteDoc:(id:string)=>void;
 }
 
 const DocsContent = createContext<DocsContentContextType>({} as DocsContentContextType);

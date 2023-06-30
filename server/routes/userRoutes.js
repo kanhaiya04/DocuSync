@@ -13,21 +13,21 @@ router.post(
   "/login",
   [
     body("email", "Invalid email address").isEmail(),
-    body("password", "password can't be null").exists(),
+    body("password", "password can't be empty").notEmpty(),
   ],
   async (req, res) => {
     try {
       const result = validationResult(req);
       if (!result.isEmpty()) {
-        return res.send({ success: false, msg: "validation failed" });
+        return res.send({ success: false,err:"Validation failed", msg:  result.errors[0].msg });
       }
       const user = await User.findOne({ email: req.body.email });
       if (!user) {
-        return res.send({ success: false, msg: "Invalid credentials" });
+        return res.send({ success: false,err:"Invalid credentials", msg: "Please check your email or password once again" });
       }
-      const passComp = bcrypt.compare(req.body.password, user.password);
+      const passComp =await bcrypt.compare(req.body.password, user.password);
       if (!passComp) {
-        return res.send({ success: false, msg: "Invalid credentials" });
+        return res.send({ success: false, err: "Invalid credentials" , msg: "Please check your email or password once again" });
       }
       const data = {
         user: {
@@ -37,7 +37,7 @@ router.post(
       const token = jwt.sign(data, process.env.ScreatKey);
       return res.send({ success: true, token });
     } catch (error) {
-      return res.send({ success: false, msg: "Internal server error" });
+      return res.send({ success: false, err: "Internal server error" });
     }
   }
 );
@@ -54,11 +54,11 @@ router.post(
     const result = validationResult(req);
     try {
       if (!result.isEmpty()) {
-        return res.send({ success: false, msg: result.errors[0].msg });
+        return res.send({ success: false,err:"Validation failed", msg: result.errors[0].msg });
       }
 
       let user = await User.findOne({ email: req.body.email });
-      if (user) return res.send({ success: false, msg: "User already exists" });
+      if (user) return res.send({ success: false,err:"User already exists", msg:"You need to login as you have already account"  });
 
       const salt = bcrypt.genSaltSync(10);
       const secPassword = bcrypt.hashSync(req.body.password, salt);
@@ -77,26 +77,42 @@ router.post(
       const token = jwt.sign(data, process.env.ScreatKey);
       return res.send({ success: true, token });
     } catch (error) {
-      return res.send({ success: false, msg: "Internal Server Error" });
+      return res.send({ success: false, err: "Internal Server Error" });
     }
   }
 );
 
-
 //join a room
-router.post("/join",fetchUser,async (req, res) => {
-    try {
-      let response = await User.findById(req.userId.id);
-      response.Docs.push(req.body.roomId);
-      response = await User.findByIdAndUpdate(
-        req.userId.id,
-        { $set: response },
-        { new: true }
-      );
-      res.send({success:true,response});
-    } catch (error) {
-      res.send({success:false,msg:"Internal Server Error"});
-    }
+router.post("/join", fetchUser, async (req, res) => {
+  try {
+    let owner = await User.findById(req.userId.id);
+    if (owner.email === req.body.email)
+      return res.send({ success: false, err: "Already have access",msg:"This user already have access to this document" });
+    let response = await User.findOne({ email: req.body.email });
+      for (let i = 0; i < response.Docs.length; i++) {
+        if (response.Docs[i] === req.body.roomId)
+          return res.send({ success: false, err: "Already have access", msg:"This user already have access to this document" });
+      }
+    
+    response.Docs.push(req.body.roomId);
+    response = await User.findByIdAndUpdate(
+      response.id,
+      { $set: response },
+      { new: true }
+    );
+    res.send({ success: true, response });
+  } catch (error) {
+    res.send({ success: false, err: "Internal Server Error" });
+  }
+});
+
+router.get("/getuser", fetchUser, async (req, res) => {
+  try {
+    const response = await User.findById({ _id: req.userId.id });
+    res.send({ success: true, response });
+  } catch (error) {
+    res.send({ success: false, err: "Internal Server Error" });
+  }
 });
 
 module.exports = router;

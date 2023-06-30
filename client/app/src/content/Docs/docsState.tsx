@@ -32,6 +32,9 @@ const DocsState: React.FC<DocsStateProps> = ({ children }) => {
     setDocs(docs.concat(doc));
   };
 
+  const emptyDoc = ()=>{
+    setDocs([]);
+  }
   const getDoc = async () => {
     const response = await fetch(`${host}/doc/getalldoc`, {
       method: "GET",
@@ -41,12 +44,34 @@ const DocsState: React.FC<DocsStateProps> = ({ children }) => {
       },
     });
     const doc = await response.json();
-    if (JSON.stringify(doc.response) !== JSON.stringify(docs))
+    if (JSON.stringify(doc.response) !== JSON.stringify(docs)) {
+
       setDocs(doc.response);
+    }
   };
 
+
+  const deleteDoc = async (id: string) => {
+    const response = await fetch(`${host}/doc/deletedoc`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        token: configStore.getSecret(),
+      },
+      body: JSON.stringify({ _id: id }),
+    });
+    const json = await response.json();
+
+    if (json.success) {
+      const newDoc = docs.filter((doc) => {
+        return doc._id !== id;
+      });
+
+      setDocs(newDoc);
+    }
+  };
   return (
-    <DocsContent.Provider value={{ docs, addDoc, getDoc }}>
+    <DocsContent.Provider value={{ docs, emptyDoc , addDoc, getDoc, deleteDoc }}>
       {children}
     </DocsContent.Provider>
   );

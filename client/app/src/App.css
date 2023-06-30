@@ -1,0 +1,178 @@
+
+
+@media(min-width:579px){
+  .vertical-line {
+    border-left: 1px solid #000;
+    height: 40vh;
+  }
+}
+
+.user_profile .btn{
+  background-color: #0E2954 !important;
+  border: none;
+}
+
+/* .btn:hover {
+        
+      } */
+
+.main-heading {
+  font-size: 5rem;
+  padding-left: 5rem;
+}
+
+.details {
+  font-size: 3rem;
+  padding-left: 5rem;
+}
+
+@media (max-width: 1368px) or (max-height: 900px) {
+  .main-heading {
+    font-size: 4rem;
+    padding-left: 3rem;
+  }
+
+  .details {
+    font-size: 2rem;
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 1080px) or (max-height: 780px) {
+  .main-heading {
+    font-size: 3rem;
+    padding-left: 2rem;
+  }
+
+  .details {
+    font-size: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (max-width: 824px) or (max-height: 602px) {
+  .main-heading {
+    font-size: 2rem;
+    padding-left: 2rem;
+  }
+
+  .details {
+    font-size: 1.5rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (max-width: 630px) or (max-height: 505px) {
+  .main-heading {
+    font-size: 1.5rem;
+    padding-left: 1rem;
+  }
+
+  .details {
+    font-size: 1rem;
+    padding-left: 1rem;
+  }
+}
+
+.custom-nav-dropdown::after {
+  display: none !important;
+}
+
+.main-container {
+  height: 93vh;
+}
+
+.doc-card {
+  margin-top: 3rem !important;
+  max-height: 73vh;
+}
+
+@media (max-height: 865px) {
+  .main-container {
+    height: 90vh;
+  }
+  .doc-card {
+    margin-top: 2.5rem !important;
+    max-height: 70vh;
+  }
+}
+
+@media (max-height: 725px) {
+  .main-container {
+    height: 90vh;
+  }
+
+  .doc-card {
+    margin-top: 2rem !important;
+    max-height: 65vh;
+  }
+}
+@media (max-height: 622px) {
+  .main-container {
+    height: 85vh;
+  }
+  .doc-card {
+    margin-top: 1.5rem !important;
+    max-height: 60vh;
+  }
+}
+
+@media (max-height: 505px) {
+  .main-container {
+    height: 80vh;
+  }
+  .doc-card {
+    margin-top: 1rem !important;
+    max-height: 55vh;
+  }
+}
+
+@media (max-height: 437px) {
+  .main-container {
+    height: 70vh;
+  }
+  .doc-card {
+    margin-top: 1rem !important;
+    max-height: 50vh;
+  }
+}
+
+@media (max-height: 370px) {
+  .main-container {
+    height: 65vh;
+  }
+  .doc-card {
+    margin-top: 1rem !important;
+    max-height: 45vh;
+  }
+}
+
+
+
+.workspace-main{
+  height: 90%;
+}
+
+@media(max-height:696px){
+  .workspace-main{
+    height: 85%;
+  } 
+}
+
+@media(max-height:534px){
+  .workspace-main{
+    height: 80%;
+  } 
+}
+
+@media(max-height:357px){
+  .workspace-main{
+    height: 70%;
+  } 
+}
+
+@media(max-height:310px){
+  .workspace-main{
+    height: 55%;
+  } 
+}
