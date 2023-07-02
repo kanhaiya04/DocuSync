@@ -97,14 +97,14 @@ const template = [
         label: 'Repo',
         click: async () => {
           const { shell } = require('electron')
-          await shell.openExternal('https://github.com/kanhaiya04')
+          await shell.openExternal('https://github.com/kanhaiya04/DocuSync')
         }
       },
       {
-        label: "Report Issue",
+        label: "Report An Issue",
         click: async () => {
                 const { shell } = require('electron')
-                await shell.openExternal('https://github.com/kanhaiya04')
+                await shell.openExternal('https://github.com/kanhaiya04/DocuSync/issues/new')
               }
       }
     ]
