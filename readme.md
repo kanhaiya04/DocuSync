@@ -33,7 +33,7 @@ Electron dependencies:
 cd client/
 npm install
 ```
-Note: Update the host url in React components to - 
+Note: Update the host url in React components to - https://docusyncbackend.onrender.com
 
 Install React dependencies:
 ```bash
@@ -108,7 +108,9 @@ npm install
 **Run the electron app locally**
 ```bash
 cd client/
-npm run
+npm start
 ```
+
+
 
 
