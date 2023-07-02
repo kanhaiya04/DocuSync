@@ -1,4 +1,3 @@
-
 # DocuSync
 
 A collaborative text editor desktop application designed for seamless teamwork.
@@ -29,25 +28,30 @@ cd DocuSync/
 Use the package manager to install dependencies
 
 Electron dependencies:
+
 ```bash
 cd client/
 npm install
 ```
+
 Note: Update the host url in React components to - https://docusyncbackend.onrender.com
 
 Install React dependencies:
+
 ```bash
 cd client/app
 npm install
 ```
 
 Build app from react components
+
 ```bash
 cd client/app
 npm run build
 ```
 
 Build DocuSync from source code for your platform
+
 ```bash
 cd client/
 npm run make
@@ -55,9 +59,7 @@ npm run make
 
 Once the build process is successfully completed, you will find the installation package in the "out" folder.
 
-
-# Run from source code for development 
-
+# Run from source code for development
 
 **Clone the repo**
 
@@ -72,12 +74,13 @@ cd DocuSync/
 touch .env
 cp .env.sample .env
 ```
-update the values in the .env file
 
+update the values in the .env file
 
 **Use the npm package manager to install dependencies**
 
-INstall express dependencies:
+Install express dependencies:
+
 ```bash
 cd server/
 npm install
@@ -85,8 +88,13 @@ npm install
 
 **Run the express server**
 
+```bash
+cd server/
+node index
+```
 
 Install react dependencies:
+
 ```bash
 cd client/app
 npm install
@@ -100,17 +108,15 @@ npm run build
 ```
 
 Install electron dependencies:
+
 ```bash
 cd client/
 npm install
 ```
 
 **Run the electron app locally**
+
 ```bash
 cd client/
 npm start
 ```
-
-
-
-
