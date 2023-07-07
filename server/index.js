@@ -37,6 +37,10 @@ io.on("connection", (socket) => {
   socket.on("updateDoc", (payload, roomid) => {
     io.to(roomid).emit("updatedDoc", payload);
   });
+
+  socket.on("msg",(payload,roomid)=>{
+      io.to(roomid).emit("msg",payload);
+  });
 });
 
 httpServer.listen(5000);

@@ -87,6 +87,10 @@
   max-height: 73vh;
 }
 
+.Chatbox{
+  height: 40%;
+}
+
 @media (max-height: 865px) {
   .main-container {
     height: 90vh;
@@ -95,6 +99,7 @@
     margin-top: 2.5rem !important;
     max-height: 70vh;
   }
+
 }
 
 @media (max-height: 725px) {
@@ -125,6 +130,7 @@
     margin-top: 1rem !important;
     max-height: 55vh;
   }
+  
 }
 
 @media (max-height: 437px) {
@@ -163,16 +169,27 @@
   .workspace-main{
     height: 80%;
   } 
+  .Chatbox{
+    height: 45%;
+  }
 }
 
 @media(max-height:357px){
   .workspace-main{
     height: 70%;
   } 
+  .Chatbox{
+    height: 30%;
+  }
 }
 
-@media(max-height:310px){
-  .workspace-main{
-    height: 55%;
-  } 
+@media(max-width:779px){
+  .workspace-col{
+    height: 50vh;
+  }
+  .Chatbox{
+    margin: 0 !important;
+  }
+
 }
+
