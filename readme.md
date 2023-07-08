@@ -6,6 +6,7 @@ Some of the key features
 
 - User authentication
 - Real-time collaboration
+- Real-time Chatting support
 - Only authorized users can edit or access specific documents
 - MongoDB integration for storing the documents
 - Supports Windows, MacOS, and Linux as well
@@ -16,6 +17,8 @@ Some of the key features
 **Workspace Page**
 ![Workspace Page](./img/Workspace.png)
 
+**Demo**
+![demo gif](./img/demo.gif)
 # Build from Source Code
 
 Clone the repo
@@ -25,7 +28,7 @@ git clone https://github.com/kanhaiya04/DocuSync.git
 cd DocuSync/
 ```
 
-Use the package manager to install dependencies
+**Use the npm package manager to install dependencies**
 
 Electron dependencies:
 
@@ -34,7 +37,7 @@ cd client/
 npm install
 ```
 
-Note: Update the host url in React components to - https://docusyncbackend.onrender.com
+**Note: Update the host url in React components to - https://docusyncbackend.onrender.com**
 
 Install React dependencies:
 
@@ -57,18 +60,18 @@ cd client/
 npm run make
 ```
 
-Once the build process is successfully completed, you will find the installation package in the "out" folder.
+**Once the build process is successfully completed, you will find the installation package in the "out" folder.**
 
 # Run from source code for development
 
-**Clone the repo**
+Clone the repo
 
 ```bash
 git clone https://github.com/kanhaiya04/DocuSync.git
 cd DocuSync/
 ```
 
-**Create and configure .env file**
+Create and configure .env file
 
 ```bash
 touch .env
@@ -86,7 +89,7 @@ cd server/
 npm install
 ```
 
-**Run the express server**
+Run the express server
 
 ```bash
 cd server/
@@ -100,7 +103,7 @@ cd client/app
 npm install
 ```
 
-**Build the app from components**
+Build the app from components
 
 ```bash
 cd client/app
@@ -114,9 +117,11 @@ cd client/
 npm install
 ```
 
-**Run the electron app locally**
+Run the electron app locally
 
 ```bash
 cd client/
 npm start
 ```
+
+**Now you are good to make contributions to the code base.**

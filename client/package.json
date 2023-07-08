@@ -1,5 +1,5 @@
 {
-  "name": "docusync2",
+  "name": "DocuSync",
   "version": "0.0.1",
   "description": "Collabrative tool for Docs",
   "main": "main.js",
@@ -27,7 +27,7 @@
   "build": {
     "appId": "DocuSync",
     "win": {
-      "icon": "/icon.png"
+      "icon": "./icon.png"
     },
     "mac": {
       "icon": "/icon.png"

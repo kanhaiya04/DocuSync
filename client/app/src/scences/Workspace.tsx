@@ -105,6 +105,7 @@ const Workspace: React.FC = () => {
         msg: json.msg ? json.msg : "",
       });
     }
+    handleJoinClose();
   };
 
  
