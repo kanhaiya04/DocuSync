@@ -3,6 +3,7 @@ const { body, validationResult } = require("express-validator");
 const router = require("express").Router();
 const Doc = require("../models/Docs");
 const User = require("../models/User");
+const logger = require("../logger");
 
 //get all docs
 router.get("/getalldoc", fetchUser, async (req, res) => {
@@ -18,9 +19,7 @@ router.get("/getalldoc", fetchUser, async (req, res) => {
       }
     }
     if (updatedDoc.length !== userData.Docs.length) {
-      userData.Docs.length = 0;
-
-      userData.Docs.push(...updatedDoc);
+      userData.Docs = updatedDoc;
 
       await User.findByIdAndUpdate(
         req.userId.id,
@@ -30,19 +29,28 @@ router.get("/getalldoc", fetchUser, async (req, res) => {
     }
     res.send({ success: true, response });
   } catch (error) {
-    res.send({
+    logger.error("Get all docs error:", error);
+    res.status(500).send({
       success: false,
       err: "Internal Server Error",
     });
   }
 });
 
-router.post("/getdoc", async (req, res) => {
+router.get("/getdoc", async (req, res) => {
   try {
-    const response = await Doc.findById(req.body.id);
+    if (!req.query.id) {
+      return res.status(400).send({ success: false, err: "Missing document ID", msg: "Document ID is required" });
+    }
+    
+    const response = await Doc.findById(req.query.id);
+    if (!response) {
+      return res.status(404).send({ success: false, err: "Document not found", msg: "No document found with this ID" });
+    }
     res.send({ success: true, response });
   } catch (error) {
-    res.send({ success: false, err: "Internal Server Error"});
+    logger.error("Get doc error:", error);
+    res.status(500).send({ success: false, err: "Internal Server Error"});
   }
 });
 
@@ -58,7 +66,7 @@ router.post(
     try {
       const result = validationResult(req);
       if (!result.isEmpty()) {
-        return res.send({ success: false, err: "Validation failed", msg:result.errors[0].msg});
+        return res.status(400).send({ success: false, err: "Validation failed", msg:result.errors[0].msg});
       }
       const doc = await Doc.create({
         title: req.body.title,
@@ -68,15 +76,28 @@ router.post(
       const response = await doc.save();
       res.send({ success: true, response });
     } catch (error) {
-      res.send({ success: false, err: "Internal Server Error" });
+      logger.error("Create doc error:", error);
+      res.status(500).send({ success: false, err: "Internal Server Error" });
     }
   }
 );
 
 router.post("/updatedoc", fetchUser, async (req, res) => {
   try {
+    if (!req.body._id) {
+      return res.status(400).send({ success: false, err: "Missing document ID", msg: "Document ID is required" });
+    }
+    
+    if (!req.body.content) {
+      return res.status(400).send({ success: false, err: "Missing content", msg: "Content is required" });
+    }
+    
     let valid = false;
     let response = await Doc.findById(req.body._id);
+    
+    if (!response) {
+      return res.status(404).send({ success: false, err: "Document not found", msg: "No document found with this ID" });
+    }
     const userData = await User.findById(req.userId.id);
 
     if (response.user == req.userId.id) {
@@ -96,16 +117,25 @@ router.post("/updatedoc", fetchUser, async (req, res) => {
       );
       return res.send({ success: true, response });
     }
-    res.send({ success: false, err: "Invalid Access",msg: "You don't have access to perform this operation"});
+    res.status(403).send({ success: false, err: "Invalid Access",msg: "You don't have access to perform this operation"});
   } catch (error) {
-    res.send({ success: false, err: "Internal Server Error" });
+    logger.error("Update doc error:", error);
+    res.status(500).send({ success: false, err: "Internal Server Error" });
   }
 });
 
 router.delete("/deletedoc", fetchUser, async (req, res) => {
   try {
+    if (!req.body._id) {
+      return res.status(400).send({ success: false, err: "Missing document ID", msg: "Document ID is required" });
+    }
+    
     let valid = false;
     let response = await Doc.findById(req.body._id);
+    
+    if (!response) {
+      return res.status(404).send({ success: false, err: "Document not found", msg: "No document found with this ID" });
+    }
     const userData = await User.findById(req.userId.id);
 
     if (response.user == req.userId.id) {
@@ -119,12 +149,13 @@ router.delete("/deletedoc", fetchUser, async (req, res) => {
       }
     }
     if (valid) {
-      response = await Doc.findByIdAndDelete({ _id: req.body._id });
+      response = await Doc.findByIdAndDelete(req.body._id);
       return res.send({ success: true, response });
     }
-    res.send({ success: false, err: "Invalid Access",msg: "You don't have access to perform this operation" });
+    res.status(403).send({ success: false, err: "Invalid Access",msg: "You don't have access to perform this operation" });
   } catch (error) {
-    res.send({ success: false, err: "Internal Server Error" });
+    logger.error("Delete doc error:", error);
+    res.status(500).send({ success: false, err: "Internal Server Error" });
   }
 });
 
