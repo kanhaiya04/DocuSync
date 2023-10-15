@@ -1,5 +1,7 @@
 client/node_modules/
 server/node_modules/
 client/app/node_modules/
+client/app/build/
 .env
 client/out
+server/logs/
