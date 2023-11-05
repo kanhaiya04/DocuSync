@@ -1,0 +1,139 @@
+/* Custom styles for Quill editor in dark theme */
+.ql-toolbar {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+}
+
+.ql-container {
+  border: 1px solid #dee2e6;
+  border-radius: 0 0 8px 8px;
+  font-size: 14px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.ql-editor {
+  height: 100%;
+  padding: 12px;
+  color: #212529;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.ql-editor.ql-blank::before {
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Custom button styles */
+.ql-toolbar .ql-stroke {
+  stroke: #495057;
+}
+
+.ql-toolbar .ql-fill {
+  fill: #495057;
+}
+
+.ql-toolbar button:hover .ql-stroke {
+  stroke: #0E2954;
+}
+
+.ql-toolbar button:hover .ql-fill {
+  fill: #0E2954;
+}
+
+.ql-toolbar button.ql-active .ql-stroke {
+  stroke: #0E2954;
+}
+
+.ql-toolbar button.ql-active .ql-fill {
+  fill: #0E2954;
+}
+
+/* Format dropdowns */
+.ql-toolbar .ql-picker-label {
+  color: #495057;
+}
+
+.ql-toolbar .ql-picker-options {
+  background-color: white;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.ql-toolbar .ql-picker-item:hover {
+  background-color: #f8f9fa;
+  color: #0E2954;
+}
+
+/* Ensure text visibility */
+.ql-editor p {
+  color: #212529;
+  margin: 0 0 1em 0;
+}
+
+.ql-editor h1, .ql-editor h2, .ql-editor h3, 
+.ql-editor h4, .ql-editor h5, .ql-editor h6 {
+  color: #212529;
+  font-weight: bold;
+}
+
+.ql-editor strong {
+  color: #212529;
+  font-weight: bold;
+}
+
+.ql-editor em {
+  color: #212529;
+  font-style: italic;
+}
+
+.ql-editor u {
+  color: #212529;
+  text-decoration: underline;
+}
+
+.ql-editor s {
+  color: #212529;
+  text-decoration: line-through;
+}
+
+/* Ensure proper contrast for all text */
+.ql-editor * {
+  color: inherit;
+}
+
+/* Override any inherited dark colors */
+.ql-editor {
+  color: #212529 !important;
+  background-color: white !important;
+}
+
+.ql-editor p, .ql-editor div, .ql-editor span {
+  color: #212529 !important;
+}
+
+/* Ensure the editor container has proper styling */
+.ql-container {
+  background-color: white !important;
+  color: #212529 !important;
+}
+
+/* Override any dark theme inheritance */
+.ql-snow .ql-editor {
+  color: #212529 !important;
+  background-color: white !important;
+}
+
+.ql-snow .ql-editor p,
+.ql-snow .ql-editor h1,
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h4,
+.ql-snow .ql-editor h5,
+.ql-snow .ql-editor h6 {
+  color: #212529 !important;
+}

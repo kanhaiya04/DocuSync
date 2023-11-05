@@ -26,7 +26,7 @@ const Home = () => {
     } else {
       navigator("/login");
     }
-  });
+  }, [getDoc, navigator, configStore]);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -68,7 +68,15 @@ const Home = () => {
             <Button variant="secondary" onClick={handleClose}>
               Close
             </Button>
-            <Button variant="primary" onClick={createNewDoc}>
+            <Button
+              variant="primary"
+              onClick={createNewDoc}
+              style={{
+                borderColor: "#213555",
+                color: "white",
+                backgroundColor: "#213555",
+              }}
+            >
               Create
             </Button>
           </Modal.Footer>
@@ -101,14 +109,12 @@ const Home = () => {
         <Row className="doc-card" style={{ overflowY: "auto" }}>
           {docs.map((doc, index) => {
             let content;
-            if(!doc.content) {
+            if (!doc.content) {
               content = "No content";
-            }
-            else if (doc.content.length>145) {
+            } else if (doc.content.length > 145) {
               content = doc.content.substring(0, 145) + "...";
-            } 
-            else{
-              content= doc.content;
+            } else {
+              content = doc.content;
             }
             return (
               <DocsCard

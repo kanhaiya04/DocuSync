@@ -79,7 +79,10 @@
 }
 
 .main-container {
-  height: 93vh;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .doc-card {
@@ -88,7 +91,10 @@
 }
 
 .Chatbox{
-  height: 40%;
+  height: 100%;
+  min-height: 200px;
+  max-height: calc(100vh - 300px);
+  overflow-y: auto;
 }
 
 @media (max-height: 865px) {
@@ -156,7 +162,17 @@
 
 
 .workspace-main{
-  height: 90%;
+  height: calc(100vh - 120px);
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.workspace-col {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 @media(max-height:696px){
@@ -184,12 +200,103 @@
 }
 
 @media(max-width:779px){
+  .workspace-main{
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .workspace-col{
+    height: 60vh;
+    margin-bottom: 10px;
+  }
+  
+  .workspace-main .col:last-child{
+    height: 35vh;
+    margin-left: 0;
+  }
+  
+  .Chatbox{
+    margin: 0 !important;
+    max-height: calc(35vh - 80px);
+    min-height: 0;
+  }
+}
+
+@media(max-width:576px){
   .workspace-col{
     height: 50vh;
   }
-  .Chatbox{
-    margin: 0 !important;
+  
+  .workspace-main .col:last-child{
+    height: 40vh;
   }
+  
+  .workspace-main .col:last-child > div {
+    margin-left: 0.5rem;
+  }
+  
+  .Chatbox{
+    max-height: calc(40vh - 80px);
+    min-height: 0;
+  }
+}
 
+/* Ensure save button is always visible */
+.workspace-col {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 100%;
+}
+
+.workspace-col > div:first-child {
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.workspace-col > div:last-child {
+  flex-shrink: 0;
+  min-height: 50px;
+}
+
+/* Ensure no overflow on the main workspace */
+.workspace-main .row {
+  height: 100%;
+  margin: 0;
+}
+
+.workspace-main .col {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Chat component styling */
+.workspace-main .col:last-child {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Ensure chat input area is always visible */
+.workspace-main .col:last-child > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Chat messages area with fixed height */
+.workspace-main .col:last-child .Chatbox {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* Ensure input area stays at bottom */
+.workspace-main .col:last-child > div > div:last-child {
+  flex-shrink: 0;
+  height: 60px;
+  min-height: 60px;
 }
 

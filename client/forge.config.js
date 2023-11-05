@@ -6,7 +6,10 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        authors: 'Kanhaiya Yadav',
+        description: 'Collabrative tool for Docs',
+      },
     },
     {
       name: '@electron-forge/maker-zip',

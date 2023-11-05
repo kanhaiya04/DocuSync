@@ -1,7 +1,7 @@
 import userContext from "./usersContent";
 import { User } from "./usersContent";
 import React, { ReactNode, useState } from "react";
-const host = "http://localhost:5000";
+const host = "https://docusync-server.onrender.com";
 const configStore = (window as any).configStore;
 interface UsersStateProps {
   children: ReactNode;
