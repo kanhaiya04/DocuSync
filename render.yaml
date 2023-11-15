@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: docusync-server
+    runtime: node
+    region: oregon  # Change to your preferred region (oregon, frankfurt, singapore, etc.)
+    plan: free  # Change to 'starter' or higher for production
+    buildCommand: cd server && npm install
+    startCommand: cd server && node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: mongoDb
+        sync: false  # Set this manually in Render dashboard with your MongoDB connection string
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health
+
