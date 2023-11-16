@@ -23,6 +23,16 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
+    {
+      name: '@electron-forge/maker-snap',
+      config: {
+        summary: 'Collaborative tool for Docs',
+        description: 'DocSync is a collaborative document editing tool that allows real-time collaboration on documents.',
+        grade: 'stable',
+        confinement: 'strict',
+        architectures: ['amd64'],
+      },
+    },
   ],
   plugins: [
     {

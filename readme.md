@@ -1,4 +1,4 @@
-# DocuSync
+# DocSync
 
 A collaborative text editor desktop application designed for seamless teamwork.
 
@@ -53,7 +53,7 @@ cd client/app
 npm run build
 ```
 
-Build DocuSync from source code for your platform
+Build docSync from source code for your platform
 
 ```bash
 cd client/

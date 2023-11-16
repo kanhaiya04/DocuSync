@@ -103,7 +103,7 @@ const SignUp: React.FC = () => {
         ipcRendener.send("key:set", {
           token: token,
         });
-        toast.success("Account created successfully! Welcome to DocuSync!");
+        toast.success("Account created successfully! Welcome to DocSync!");
         navigator("/");
       } else {
         toast.error(json.msg || json.err || "Sign up failed. Please try again.");

@@ -5,7 +5,7 @@ const { setStoreValue } = require("./setting");
 const { mainMenu } = require("./menu");
 function createMainWindow() {
   const mainWindow = new BrowserWindow({
-    title: "DocuSync",
+    title: "DocSync",
     width: 1000,
     height: 600,
     icon: "./icon.png",
