@@ -17,8 +17,6 @@ Some of the key features
 **Workspace Page**
 ![Workspace Page](./img/Workspace.png)
 
-**Demo**
-![demo gif](./img/demo.gif)
 # Build from Source Code
 
 Clone the repo
