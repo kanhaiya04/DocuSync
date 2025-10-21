@@ -37,20 +37,15 @@ jobs:
       run: |
         sudo snap install snapcraft --classic
         
-    - name: Install LXD
-      run: |
-        sudo snap install lxd
-        sudo lxd init --auto
-        
     - name: Build Electron app for Linux (without snap)
       run: |
         cd client
         npx electron-forge make --targets=@electron-forge/maker-deb,@electron-forge/maker-rpm
         
-    - name: Build snap
+    - name: Build snap (destructive mode)
       run: |
         cd client/snap
-        snapcraft --use-lxd
+        snapcraft --destructive-mode
         
     - name: List built files
       run: |
