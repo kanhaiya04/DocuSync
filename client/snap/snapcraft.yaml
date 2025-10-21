@@ -36,7 +36,7 @@ apps:
 parts:
   docsync:
     plugin: dump
-    source: ./out/make/snap/
+    source: ../out/make/deb/x64/
     organize:
       "*": "docsync/"
     stage:
