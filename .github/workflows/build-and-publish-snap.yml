@@ -37,9 +37,8 @@ jobs:
         npm run make
         
     - name: Install snapcraft
-      uses: snapcore/action-setup@v1
-      with:
-        snapcraft-channel: 'stable'
+      run: |
+        sudo snap install snapcraft --classic
         
     - name: Install LXD
       run: |
@@ -57,11 +56,8 @@ jobs:
         
     - name: Upload snap to store (only if secrets are configured)
       if: ${{ secrets.SNAP_STORE_AUTH != '' }}
-      uses: snapcore/action-publish@v1
-      with:
-        snap-file: client/*.snap
-        store: ${{ secrets.SNAP_STORE }}
-        release: edge
+      run: |
+        snapcraft upload client/*.snap --release=edge
       env:
         SNAP_STORE_AUTH: ${{ secrets.SNAP_STORE_AUTH }}
         

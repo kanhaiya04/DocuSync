@@ -38,9 +38,8 @@ jobs:
         npm run make
         
     - name: Install snapcraft
-      uses: snapcore/action-setup@v1
-      with:
-        snapcraft-channel: 'stable'
+      run: |
+        sudo snap install snapcraft --classic
         
     - name: Install LXD
       run: |
