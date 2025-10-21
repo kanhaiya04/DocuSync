@@ -1,0 +1,65 @@
+name: Build Snap Package
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build-snap:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: client/package-lock.json
+        
+    - name: Install dependencies
+      run: |
+        cd client
+        npm ci
+        
+    - name: Build React app
+      run: |
+        cd client
+        npm run build
+        
+    - name: Build Electron app for Linux
+      run: |
+        cd client
+        npm run make
+        
+    - name: Install snapcraft
+      uses: snapcore/action-setup@v1
+      with:
+        snapcraft-channel: 'stable'
+        
+    - name: Install LXD
+      run: |
+        sudo snap install lxd
+        sudo lxd init --auto
+        
+    - name: Build snap
+      run: |
+        cd client
+        snapcraft --use-lxd
+        
+    - name: List built files
+      run: |
+        ls -la client/*.snap || echo "No snap files found"
+        ls -la client/out/make/ || echo "No make output found"
+        
+    - name: Upload snap as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docusync-snap-${{ github.sha }}
+        path: client/*.snap
+        retention-days: 30
