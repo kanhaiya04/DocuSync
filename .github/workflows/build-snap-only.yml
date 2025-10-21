@@ -42,24 +42,24 @@ jobs:
         sudo snap install lxd
         sudo lxd init --auto
         
-    - name: Build Electron app for Linux
+    - name: Build Electron app for Linux (without snap)
       run: |
         cd client
-        npm run make
+        npx electron-forge make --targets=@electron-forge/maker-deb,@electron-forge/maker-rpm
         
     - name: Build snap
       run: |
-        cd client
+        cd client/snap
         snapcraft --use-lxd
         
     - name: List built files
       run: |
-        ls -la client/*.snap || echo "No snap files found"
+        ls -la client/snap/*.snap || echo "No snap files found"
         ls -la client/out/make/ || echo "No make output found"
         
     - name: Upload snap as artifact
       uses: actions/upload-artifact@v4
       with:
         name: docusync-snap-${{ github.sha }}
-        path: client/*.snap
+        path: client/snap/*.snap
         retention-days: 30
