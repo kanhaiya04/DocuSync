@@ -17,7 +17,7 @@ architectures:
 
 apps:
   docsync:
-    command: docsync
+    command: docsync/DocuSync
     plugs:
       - home
       - network

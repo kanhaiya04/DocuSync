@@ -42,6 +42,11 @@ jobs:
         cd client
         npx electron-forge make --targets=@electron-forge/maker-deb,@electron-forge/maker-rpm
         
+    - name: List deb package contents
+      run: |
+        ls -la client/out/make/deb/x64/
+        dpkg -c client/out/make/deb/x64/*.deb || echo "No deb files found"
+        
     - name: Build snap (destructive mode)
       run: |
         cd client/snap
