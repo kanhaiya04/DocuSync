@@ -33,11 +33,6 @@ jobs:
         npm ci
         npm run build
         
-    - name: Build Electron app for Linux
-      run: |
-        cd client
-        npm run make
-        
     - name: Install snapcraft
       run: |
         sudo snap install snapcraft --classic
@@ -46,6 +41,11 @@ jobs:
       run: |
         sudo snap install lxd
         sudo lxd init --auto
+        
+    - name: Build Electron app for Linux
+      run: |
+        cd client
+        npm run make
         
     - name: Build snap
       run: |
