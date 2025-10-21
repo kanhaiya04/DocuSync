@@ -29,7 +29,8 @@ jobs:
         
     - name: Build React app
       run: |
-        cd client
+        cd client/app
+        npm ci
         npm run build
         
     - name: Build Electron app for Linux
