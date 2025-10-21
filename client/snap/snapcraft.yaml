@@ -1,0 +1,45 @@
+name: docsync
+version: '0.0.1'
+summary: Collaborative tool for Docs
+description: |
+  DocSync is a collaborative document editing tool that allows real-time 
+  collaboration on documents. Built with Electron and React, it provides 
+  a modern interface for team document management and editing.
+
+grade: stable
+confinement: strict
+
+base: core20
+
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  docsync:
+    command: docsync
+    plugs:
+      - home
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - gsettings
+      - wayland
+      - x11
+      - opengl
+      - audio-playback
+      - audio-record
+    environment:
+      DISABLE_WAYLAND: 1
+
+parts:
+  docsync:
+    plugin: dump
+    source: ./out/make/snap/
+    organize:
+      "*": "docsync/"
+    stage:
+      - -usr
+    prime:
+      - -usr
