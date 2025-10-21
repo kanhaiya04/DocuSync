@@ -31,6 +31,7 @@ module.exports = {
         grade: 'stable',
         confinement: 'strict',
         architectures: ['amd64'],
+        base: 'core20',
       },
     },
   ],
