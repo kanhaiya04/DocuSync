@@ -17,7 +17,7 @@ architectures:
 
 apps:
   docsync:
-    command: docsync/DocuSync
+    command: docsync
     plugs:
       - home
       - network
@@ -34,6 +34,12 @@ apps:
       DISABLE_WAYLAND: 1
 
 parts:
+  node:
+    plugin: nodejs
+    node-version: 18
+    source: ../app/
+    npm-run: build
+    
   docsync:
     plugin: dump
     source: ../out/make/deb/x64/
