@@ -1,0 +1,48 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install dependencies
+      run: |
+        cd client
+        npm install
+        
+    - name: Build React app
+      run: |
+        cd client/app
+        npm install
+        npm run build
+        
+    - name: Build Electron packages
+      run: |
+        cd client
+        npx electron-forge make
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: |
+          client/out/make/deb/x64/*.deb
+          client/out/make/rpm/x64/*.rpm
+          client/out/make/squirrel.windows/x64/*.exe
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

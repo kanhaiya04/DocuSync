@@ -19,6 +19,51 @@ Some of the key features
 
 **Demo**
 ![demo gif](./img/demo.gif)
+
+# Installation
+
+## Download Pre-built Packages
+
+Download the latest release for your platform from the [Releases page](https://github.com/kanhaiya04/DocuSync/releases).
+
+### Ubuntu/Debian
+
+```bash
+# Download the .deb file from releases
+sudo dpkg -i docsync_0.0.1_amd64.deb
+
+# Fix any dependency issues
+sudo apt-get install -f
+
+# Run the app
+docsync
+```
+
+### Fedora/RHEL/CentOS
+
+```bash
+# Download the .rpm file from releases
+sudo dnf install ./docsync-0.0.1-1.x86_64.rpm
+
+# Or using rpm
+sudo rpm -i docsync-0.0.1-1.x86_64.rpm
+
+# Run the app
+docsync
+```
+
+### Windows
+
+```bash
+# Download the .exe installer from releases
+# Run DocuSync-0.0.1 Setup.exe
+# Follow the installation wizard
+```
+
+## Server Configuration
+
+The app connects to the backend server at: **https://docusyncbackend.onrender.com**
+
 # Build from Source Code
 
 Clone the repo
