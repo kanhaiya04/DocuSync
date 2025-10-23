@@ -1,4 +1,4 @@
-name: Build Snap Package
+name: Build Linux Packages
 
 on:
   push:
@@ -33,25 +33,27 @@ jobs:
         npm install
         npm run build
         
-    - name: Install snapcraft
-      run: |
-        sudo snap install snapcraft --classic
-        
-    - name: Build Electron app for Linux (including snap)
+    - name: Build Electron app for Linux (deb and rpm)
       run: |
         cd client
         npx electron-forge make
-      env:
-        SNAPCRAFT_BUILD_ENVIRONMENT: host
         
     - name: List built files
       run: |
         ls -laR client/out/make/ || echo "No make output found"
-        find client/out/make -name "*.snap" || echo "No snap files found"
+        find client/out/make -name "*.deb" || echo "No deb files found"
+        find client/out/make -name "*.rpm" || echo "No rpm files found"
         
-    - name: Upload snap as artifact
+    - name: Upload deb package as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: docusync-snap-${{ github.sha }}
-        path: client/out/make/**/*.snap
+        name: docusync-deb-${{ github.sha }}
+        path: client/out/make/**/*.deb
+        retention-days: 30
+        
+    - name: Upload rpm package as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docusync-rpm-${{ github.sha }}
+        path: client/out/make/**/*.rpm
         retention-days: 30

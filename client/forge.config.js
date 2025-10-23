@@ -23,17 +23,19 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {},
     },
-    {
-      name: '@electron-forge/maker-snap',
-      config: {
-        summary: 'Collaborative tool for Docs',
-        description: 'DocSync is a collaborative document editing tool that allows real-time collaboration on documents.',
-        grade: 'stable',
-        confinement: 'strict',
-        architectures: ['amd64'],
-        base: 'core20',
-      },
-    },
+    // Snap maker disabled - too many issues with multipass/LXD in CI
+    // Build snap manually if needed or publish deb/rpm packages instead
+    // {
+    //   name: '@electron-forge/maker-snap',
+    //   config: {
+    //     summary: 'Collaborative tool for Docs',
+    //     description: 'DocSync is a collaborative document editing tool that allows real-time collaboration on documents.',
+    //     grade: 'stable',
+    //     confinement: 'strict',
+    //     architectures: ['amd64'],
+    //     base: 'core20',
+    //   },
+    // },
   ],
   plugins: [
     {
