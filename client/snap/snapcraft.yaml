@@ -36,7 +36,7 @@ apps:
 parts:
   docsync:
     plugin: dump
-    source: ../out/DocuSync-linux-x64/
+    source: ../out/
     source-type: local
     stage-packages:
       - libgtk-3-0
