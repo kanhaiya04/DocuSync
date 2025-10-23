@@ -44,7 +44,7 @@ jobs:
         
     - name: List packaged files
       run: |
-        ls -la client/out/
+        ls -laR client/out/
         
     - name: Build Electron app for Linux (without snap)
       run: |

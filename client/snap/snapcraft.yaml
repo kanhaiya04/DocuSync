@@ -37,6 +37,7 @@ parts:
   docsync:
     plugin: dump
     source: ../out/DocuSync-linux-x64/
+    source-type: local
     stage-packages:
       - libgtk-3-0
       - libnotify4
