@@ -25,12 +25,12 @@ jobs:
     - name: Install dependencies
       run: |
         cd client
-        npm ci
+        npm install
         
     - name: Build React app
       run: |
         cd client/app
-        npm ci
+        npm install
         npm run build
         
     - name: Install snapcraft
