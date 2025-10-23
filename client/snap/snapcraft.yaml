@@ -17,7 +17,7 @@ architectures:
 
 apps:
   docsync:
-    command: docsync
+    command: DocuSync
     plugs:
       - home
       - network
@@ -34,18 +34,17 @@ apps:
       DISABLE_WAYLAND: 1
 
 parts:
-  node:
-    plugin: nodejs
-    node-version: 18
-    source: ../app/
-    npm-run: build
-    
   docsync:
     plugin: dump
-    source: ../out/make/deb/x64/
-    organize:
-      "*": "docsync/"
-    stage:
-      - -usr
-    prime:
-      - -usr
+    source: ../out/DocuSync-linux-x64/
+    stage-packages:
+      - libgtk-3-0
+      - libnotify4
+      - libnss3
+      - libxss1
+      - libxtst6
+      - xdg-utils
+      - libatspi2.0-0
+      - libdrm2
+      - libgbm1
+      - libxcb-dri3-0

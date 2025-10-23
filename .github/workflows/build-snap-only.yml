@@ -37,15 +37,19 @@ jobs:
       run: |
         sudo snap install snapcraft --classic
         
+    - name: Package Electron app for Linux
+      run: |
+        cd client
+        npx electron-forge package
+        
+    - name: List packaged files
+      run: |
+        ls -la client/out/
+        
     - name: Build Electron app for Linux (without snap)
       run: |
         cd client
         npx electron-forge make --targets=@electron-forge/maker-deb,@electron-forge/maker-rpm
-        
-    - name: List deb package contents
-      run: |
-        ls -la client/out/make/deb/x64/
-        dpkg -c client/out/make/deb/x64/*.deb || echo "No deb files found"
         
     - name: Build snap (destructive mode)
       run: |
