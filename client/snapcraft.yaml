@@ -1,0 +1,57 @@
+name: docsync
+version: '0.0.1'
+summary: Collaborative document editing tool
+description: |
+  DocuSync is a collaborative document editing tool that allows real-time 
+  collaboration on documents. Built with Electron and React, it provides 
+  a modern interface for team document management and editing.
+  
+  Features:
+  - Real-time collaboration on documents
+  - User authentication and authorization
+  - Real-time chat support
+  - Secure document storage with MongoDB
+  - Modern and intuitive interface
+
+grade: stable
+confinement: strict
+base: core20
+
+architectures:
+  - build-on: amd64
+
+apps:
+  docsync:
+    command: docsync/docsync
+    extensions: [gnome-3-38]
+    plugs:
+      - home
+      - network
+      - network-bind
+      - desktop
+      - desktop-legacy
+      - wayland
+      - x11
+      - opengl
+      - audio-playback
+    environment:
+      DISABLE_WAYLAND: 1
+
+parts:
+  docsync:
+    plugin: dump
+    source: out/DocuSync-linux-x64/
+    organize:
+      '*': docsync/
+    stage-packages:
+      - libgtk-3-0
+      - libnotify4
+      - libnss3
+      - libxss1
+      - libxtst6
+      - libatspi2.0-0
+      - libdrm2
+      - libgbm1
+      - libxcb-dri3-0
+      - libasound2
+

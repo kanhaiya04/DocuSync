@@ -28,6 +28,12 @@ Download the latest release for your platform from the [Releases page](https://g
 
 ### Ubuntu/Debian
 
+**Option 1: Install from Snap Store (Recommended)**
+```bash
+sudo snap install docsync
+```
+
+**Option 2: Install DEB Package**
 ```bash
 # Download the .deb file from releases
 sudo dpkg -i docsync_0.0.1_amd64.deb
